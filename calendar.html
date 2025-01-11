@@ -34,13 +34,13 @@
             grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days of the week */
             gap: 5px;
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             margin-top: 20px;
         }
 
         .day {
             background-color: white;
-            padding: 10px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -60,12 +60,18 @@
         .time-slot-container {
             display: none;
             margin-top: 20px;
+            max-width: 600px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .time-slot {
             background-color: white;
-            margin-bottom: 5px;
-            padding: 10px;
+            margin-bottom: 10px;
+            padding: 12px;
             border-radius: 5px;
             display: flex;
             justify-content: space-between;
@@ -110,7 +116,7 @@
             }
 
             .day {
-                padding: 8px;
+                padding: 10px;
             }
         }
     </style>
@@ -124,20 +130,8 @@
         </div>
 
         <!-- Month View Calendar -->
-        <div class="calendar-grid">
-            <div class="day" onclick="showSlots('2025-01-01')">
-                <span class="day-number">1</span>
-            </div>
-            <div class="day" onclick="showSlots('2025-01-02')">
-                <span class="day-number">2</span>
-            </div>
-            <div class="day" onclick="showSlots('2025-01-03')">
-                <span class="day-number">3</span>
-            </div>
-            <div class="day" onclick="showSlots('2025-01-04')">
-                <span class="day-number">4</span>
-            </div>
-            <!-- More days of the month here... -->
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Dynamically generated days will go here -->
         </div>
 
         <!-- Time slots for the clicked day -->
@@ -155,12 +149,31 @@
                 <span>11:00 AM - 12:00 PM</span>
                 <button>Book</button>
             </div>
-            <!-- More time slots here... -->
+            <div class="time-slot available">
+                <span>12:00 PM - 1:00 PM</span>
+                <button>Book</button>
+            </div>
+            <!-- More time slots here -->
             <button class="close-button" onclick="closeSlots()">Close</button>
         </div>
     </div>
 
     <script>
+        // Array representing the days of the month
+        const daysInMonth = 31; // You can dynamically generate this based on current month
+
+        // Function to generate the calendar
+        function generateCalendar() {
+            const calendarGrid = document.getElementById('calendar-grid');
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                dayElement.setAttribute('onclick', `showSlots('2025-01-${i.toString().padStart(2, '0')}')`);
+                dayElement.innerHTML = `<span class="day-number">${i}</span>`;
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
         // Function to show time slots when a day is clicked
         function showSlots(date) {
             document.getElementById('selected-date').innerText = `Available slots for ${date}`;
@@ -171,6 +184,9 @@
         function closeSlots() {
             document.getElementById('time-slot-container').style.display = 'none';
         }
+
+        // Initialize the calendar on page load
+        window.onload = generateCalendar;
     </script>
 
 </body>
