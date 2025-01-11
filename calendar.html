@@ -29,12 +29,12 @@
             color: #00796b;
         }
 
-        .date-slot-container {
+        .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days */
-            gap: 15px;
+            grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days of the week */
+            gap: 5px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 600px;
             margin-top: 20px;
         }
 
@@ -44,16 +44,26 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .day h3 {
-            margin-bottom: 15px;
-            color: #00796b;
+        .day:hover {
+            background-color: #00796b;
+            color: white;
+        }
+
+        .day-number {
+            font-size: 1.5rem;
+        }
+
+        .time-slot-container {
+            display: none;
+            margin-top: 20px;
         }
 
         .time-slot {
-            background-color: #f4f4f4;
+            background-color: white;
             margin-bottom: 5px;
             padding: 10px;
             border-radius: 5px;
@@ -64,24 +74,30 @@
             transition: background-color 0.3s ease;
         }
 
+        .time-slot.available {
+            background-color: #8bc34a;
+            color: white;
+        }
+
+        .time-slot.unavailable {
+            background-color: #bdbdbd;
+            color: white;
+            cursor: not-allowed;
+        }
+
         .time-slot:hover {
-            background-color: #00796b;
-            color: white;
-        }
-
-        .time-slot button {
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .time-slot button:hover {
             background-color: #004d40;
+        }
+
+        .close-button {
+            margin-top: 20px;
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
@@ -89,22 +105,12 @@
                 padding: 15px;
             }
 
-            .date-slot-container {
+            .calendar-grid {
                 grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller screens */
             }
 
             .day {
                 padding: 8px;
-            }
-
-            .time-slot {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .date-slot-container {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
             }
         }
     </style>
@@ -114,83 +120,58 @@
     <div class="calendar-container">
         <div class="calendar-header">
             <h1>Book an Event Space</h1>
-            <p>Choose a date and book a time slot for your event space!</p>
+            <p>Click on a day to view available time slots for booking.</p>
         </div>
 
-        <div class="date-slot-container">
-            <!-- Repeat this block for each day (example for Monday) -->
-            <div class="day">
-                <h3>January 25, 2025</h3>
-                <!-- Hourly slots -->
-                <div class="time-slot">
-                    <span>9:00 AM - 10:00 AM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>10:00 AM - 11:00 AM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>11:00 AM - 12:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>12:00 PM - 1:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>1:00 PM - 2:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>2:00 PM - 3:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>3:00 PM - 4:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>4:00 PM - 5:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>5:00 PM - 6:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>6:00 PM - 7:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>7:00 PM - 8:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>8:00 PM - 9:00 PM</span>
-                    <button>Book</button>
-                </div>
-                <div class="time-slot">
-                    <span>9:00 PM - 10:00 PM</span>
-                    <button>Book</button>
-                </div>
+        <!-- Month View Calendar -->
+        <div class="calendar-grid">
+            <div class="day" onclick="showSlots('2025-01-01')">
+                <span class="day-number">1</span>
             </div>
-
-            <!-- Repeat similar blocks for other days (Saturday, Sunday, etc.) -->
-            <!-- Example for another day, such as January 26, 2025 -->
-            <div class="day">
-                <h3>January 26, 2025</h3>
-                <div class="time-slot">
-                    <span>9:00 AM - 10:00 AM</span>
-                    <button>Book</button>
-                </div>
-                <!-- Add all the hourly slots for this day -->
-                <!-- ... -->
+            <div class="day" onclick="showSlots('2025-01-02')">
+                <span class="day-number">2</span>
             </div>
+            <div class="day" onclick="showSlots('2025-01-03')">
+                <span class="day-number">3</span>
+            </div>
+            <div class="day" onclick="showSlots('2025-01-04')">
+                <span class="day-number">4</span>
+            </div>
+            <!-- More days of the month here... -->
+        </div>
 
-            <!-- Continue for all days of the week -->
+        <!-- Time slots for the clicked day -->
+        <div id="time-slot-container" class="time-slot-container">
+            <h3 id="selected-date"></h3>
+            <div class="time-slot available">
+                <span>9:00 AM - 10:00 AM</span>
+                <button>Book</button>
+            </div>
+            <div class="time-slot unavailable">
+                <span>10:00 AM - 11:00 AM</span>
+                <span>Unavailable</span>
+            </div>
+            <div class="time-slot available">
+                <span>11:00 AM - 12:00 PM</span>
+                <button>Book</button>
+            </div>
+            <!-- More time slots here... -->
+            <button class="close-button" onclick="closeSlots()">Close</button>
         </div>
     </div>
+
+    <script>
+        // Function to show time slots when a day is clicked
+        function showSlots(date) {
+            document.getElementById('selected-date').innerText = `Available slots for ${date}`;
+            document.getElementById('time-slot-container').style.display = 'block';
+        }
+
+        // Function to close the time slot view
+        function closeSlots() {
+            document.getElementById('time-slot-container').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
