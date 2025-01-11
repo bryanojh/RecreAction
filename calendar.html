@@ -13,47 +13,53 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            justify-content: center;
             background-color: #f4f4f4;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Center calendar and ensure proper sizing */
+        /* Center the calendar and set a responsive max width */
         #calendar {
-            max-width: 80%;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 90%;
+            margin: 20px;
+            box-sizing: border-box;
         }
 
         /* Style for the side panel */
         .side-panel {
             position: fixed;
-            right: 0;
             top: 0;
-            width: 300px;
+            right: 0;
+            width: 320px;
             height: 100%;
             background-color: #fff;
             padding: 20px;
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             display: none;
             overflow-y: auto;
+            z-index: 999;
         }
 
         .side-panel h3 {
             margin-top: 0;
+            font-size: 1.5rem;
         }
 
         .available-slots {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
 
         .available-slots li {
             background-color: #e0f7fa;
-            padding: 10px;
-            margin: 5px 0;
+            padding: 12px;
+            margin: 8px 0;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         .available-slots li:hover {
@@ -65,24 +71,68 @@
             top: 20px;
             left: 20px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 22px;
             background: none;
             border: none;
+            color: #00796b;
         }
 
-        /* Adjust calendar when side panel is active */
+        /* Make the calendar adjust when the side panel is active */
         .calendar-with-panel {
-            margin-right: 300px;
+            margin-right: 320px;
+            transition: margin-right 0.3s ease-in-out;
         }
 
         .calendar-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #00796b;
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             margin-top: 20px;
+        }
+
+        .calendar-button:hover {
+            background-color: #004d40;
+        }
+
+        /* Responsiveness: Adjust side panel and calendar on smaller screens */
+        @media (max-width: 768px) {
+            .side-panel {
+                width: 280px;
+            }
+
+            #calendar {
+                max-width: 100%;
+            }
+
+            .calendar-with-panel {
+                margin-right: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .side-panel {
+                width: 100%;
+                height: 60%;
+                bottom: 0;
+                z-index: 9999;
+                box-shadow: none;
+            }
+
+            #calendar {
+                max-width: 100%;
+                margin: 10px 0;
+            }
+
+            .calendar-with-panel {
+                margin-right: 0;
+            }
+
+            .close-panel {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
