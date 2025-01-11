@@ -29,6 +29,14 @@
             color: #00796b;
         }
 
+        .month-year {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days of the week */
@@ -125,8 +133,15 @@
 
     <div class="calendar-container">
         <div class="calendar-header">
-            <h1>Book an Event Space</h1>
+            <h1>Space Availability</h1>
             <p>Click on a day to view available time slots for booking.</p>
+        </div>
+
+        <!-- Month & Year Display -->
+        <div class="month-year">
+            <button onclick="changeMonth(-1)">&#8592; Prev</button>
+            <div id="month-year" class="month-year-label">January 2025</div>
+            <button onclick="changeMonth(1)">Next &#8594;</button>
         </div>
 
         <!-- Month View Calendar -->
@@ -159,16 +174,38 @@
     </div>
 
     <script>
-        // Array representing the days of the month
-        const daysInMonth = 31; // You can dynamically generate this based on current month
+        // Initialize the current month and year
+        let currentMonth = new Date().getMonth(); // 0 = January, 11 = December
+        let currentYear = new Date().getFullYear();
 
-        // Function to generate the calendar
+        // Function to generate the calendar for the current month
         function generateCalendar() {
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get number of days in the current month
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // Get first day of the month
+
             const calendarGrid = document.getElementById('calendar-grid');
+            calendarGrid.innerHTML = ''; // Clear existing grid
+
+            // Update the month and year label
+            document.getElementById('month-year').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Create empty spaces before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('day');
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            // Create the days in the month
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayElement = document.createElement('div');
                 dayElement.classList.add('day');
-                dayElement.setAttribute('onclick', `showSlots('2025-01-${i.toString().padStart(2, '0')}')`);
+                dayElement.setAttribute('onclick', `showSlots('${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}')`);
                 dayElement.innerHTML = `<span class="day-number">${i}</span>`;
                 calendarGrid.appendChild(dayElement);
             }
@@ -183,6 +220,19 @@
         // Function to close the time slot view
         function closeSlots() {
             document.getElementById('time-slot-container').style.display = 'none';
+        }
+
+        // Function to navigate between months
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(); // Regenerate the calendar for the new month
         }
 
         // Initialize the calendar on page load
