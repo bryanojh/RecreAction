@@ -5,8 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Events</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #events {
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00796b;
+            text-align: center;
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .event h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .event p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .signup-button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .signup-button:hover {
+            background-color: #004d40;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+            #events {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            #events {
+                padding: 10px;
+            }
+
+            .event h2 {
+                font-size: 1.2rem;
+            }
+
+            .signup-button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px;
+            }
+
+            #events {
+                padding: 5px;
+            }
+
+            .event h2 {
+                font-size: 1rem;
+            }
+
+            .signup-button {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <div class="logo">
             <a href="index.html">Org Logo</a>
@@ -26,6 +191,7 @@
     <main>
         <section id="events">
             <h1>Upcoming Events</h1>
+
             <div class="event-list">
                 <div class="event">
                     <h2>Community Meetup</h2>
@@ -34,12 +200,14 @@
                     <p>Description: An engaging event for community bonding.</p>
                     <button class="signup-button">Sign Up</button>
                 </div>
-            </div>
-        </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 RecreAction. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+                <div class="event">
+                    <h2>Movie Screening: "The Adventure"</h2>
+                    <p>Date: February 5, 2025</p>
+                    <p>Location: Cinema Room</p>
+                    <p>Description: Join us for a movie screening of "The Adventure"!</p>
+                    <button class="signup-button">Sign Up</button>
+                </div>
+
+                <div class="event">
+          
