@@ -5,6 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset margins and padding for better layout handling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1; /* This allows the main content to expand and fill the available space */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 1000px; /* Limit the width of the content */
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .calendar-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
 </head>
 <body>
     <header>
@@ -24,17 +100,13 @@
     </header>
 
     <main>
-        <section id="home">
+        <div class="content-container">
             <img src="area-picture.jpg" alt="Picture of the area" class="hero-image">
-            <div class="mission-goal">
-                <h1>Our Mission</h1>
-                <p>We aim to provide an inclusive and engaging space for events and entertainment for the community.</p>
+            <div class="calendar-container">
+                <!-- Calendar will be embedded here -->
+                <iframe src="calendar.html" title="Events Calendar" style="width: 100%; height: 600px; border: none;"></iframe>
             </div>
-            <div class="calendar">
-                <h2>Events Calendar</h2>
-                <iframe src="calendar.html" title="Events Calendar" 
-            </div>
-        </section>
+        </div>
     </main>
 
     <footer>
