@@ -3,241 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar - Booking System</title>
-    <!-- FullCalendar CSS and JS via CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.2/main.min.js"></script>
+    <title>RecreAction - Booking Calendar</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
             background-color: #f4f4f4;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Center the calendar and set a responsive max width */
-        #calendar {
-            width: 100%;
-            max-width: 90%;
-            margin: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Style for the side panel */
-        .side-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 320px;
-            height: 100%;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            display: none;
-            overflow-y: auto;
-            z-index: 999;
-        }
-
-        .side-panel h3 {
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
-
-        .available-slots {
-            list-style-type: none;
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
 
-        .available-slots li {
-            background-color: #e0f7fa;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .calendar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        .available-slots li:hover {
-            background-color: #b2ebf2;
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .close-panel {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            font-size: 22px;
-            background: none;
-            border: none;
+        h1 {
             color: #00796b;
         }
 
-        /* Make the calendar adjust when the side panel is active */
-        .calendar-with-panel {
-            margin-right: 320px;
-            transition: margin-right 0.3s ease-in-out;
-        }
-
-        .calendar-button {
-            padding: 12px 24px;
-            background-color: #00796b;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+        .date-slot-container {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days */
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
             margin-top: 20px;
         }
 
-        .calendar-button:hover {
+        .day {
+            background-color: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .day h3 {
+            margin-bottom: 15px;
+            color: #00796b;
+        }
+
+        .time-slot {
+            background-color: #f4f4f4;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .time-slot:hover {
+            background-color: #00796b;
+            color: white;
+        }
+
+        .time-slot button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .time-slot button:hover {
             background-color: #004d40;
         }
 
-        /* Responsiveness: Adjust side panel and calendar on smaller screens */
         @media (max-width: 768px) {
-            .side-panel {
-                width: 280px;
+            .calendar-container {
+                padding: 15px;
             }
 
-            #calendar {
-                max-width: 100%;
+            .date-slot-container {
+                grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller screens */
             }
 
-            .calendar-with-panel {
-                margin-right: 280px;
+            .day {
+                padding: 8px;
+            }
+
+            .time-slot {
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
-            .side-panel {
-                width: 100%;
-                height: 60%;
-                bottom: 0;
-                z-index: 9999;
-                box-shadow: none;
-            }
-
-            #calendar {
-                max-width: 100%;
-                margin: 10px 0;
-            }
-
-            .calendar-with-panel {
-                margin-right: 0;
-            }
-
-            .close-panel {
-                font-size: 18px;
+            .date-slot-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Calendar -->
-    <div id="calendar"></div>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h1>Book an Event Space</h1>
+            <p>Choose a date and book a time slot for your event space!</p>
+        </div>
 
-    <!-- Side Panel for Booking Slots -->
-    <div class="side-panel" id="sidePanel">
-        <button class="close-panel" onclick="closePanel()">X</button>
-        <h3>Available Time Slots for <span id="selectedDate"></span></h3>
-        <ul class="available-slots" id="slotsList"></ul>
-        <button class="calendar-button" onclick="bookSlot()">Book Selected Slot(s)</button>
+        <div class="date-slot-container">
+            <!-- Repeat this block for each day (example for Monday) -->
+            <div class="day">
+                <h3>January 25, 2025</h3>
+                <!-- Hourly slots -->
+                <div class="time-slot">
+                    <span>9:00 AM - 10:00 AM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>10:00 AM - 11:00 AM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>11:00 AM - 12:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>12:00 PM - 1:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>1:00 PM - 2:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>2:00 PM - 3:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>3:00 PM - 4:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>4:00 PM - 5:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>5:00 PM - 6:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>6:00 PM - 7:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>7:00 PM - 8:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>8:00 PM - 9:00 PM</span>
+                    <button>Book</button>
+                </div>
+                <div class="time-slot">
+                    <span>9:00 PM - 10:00 PM</span>
+                    <button>Book</button>
+                </div>
+            </div>
+
+            <!-- Repeat similar blocks for other days (Saturday, Sunday, etc.) -->
+            <!-- Example for another day, such as January 26, 2025 -->
+            <div class="day">
+                <h3>January 26, 2025</h3>
+                <div class="time-slot">
+                    <span>9:00 AM - 10:00 AM</span>
+                    <button>Book</button>
+                </div>
+                <!-- Add all the hourly slots for this day -->
+                <!-- ... -->
+            </div>
+
+            <!-- Continue for all days of the week -->
+        </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var sidePanel = document.getElementById('sidePanel');
-            var selectedDateElement = document.getElementById('selectedDate');
-            var slotsList = document.getElementById('slotsList');
-            var selectedSlots = [];
-
-            // Initialize FullCalendar
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth', // Month view by default
-                dateClick: function(info) {
-                    // Show the side panel when a date is clicked
-                    selectedDateElement.textContent = info.dateStr;
-                    showSidePanel(info.dateStr);
-                },
-                events: [
-                    {
-                        title: 'Community Event',
-                        start: '2025-01-15T10:00:00',
-                        end: '2025-01-15T12:00:00',
-                        description: 'A community gathering event.',
-                        extendedProps: {
-                            availableSlots: ['12:00 - 2:00 PM', '3:00 - 5:00 PM']
-                        },
-                        color: 'lightblue'
-                    },
-                    {
-                        title: 'Yoga Class',
-                        start: '2025-01-16T08:00:00',
-                        end: '2025-01-16T09:00:00',
-                        description: 'Morning yoga class.',
-                        extendedProps: {
-                            availableSlots: ['9:30 - 11:00 AM', '11:30 - 1:00 PM']
-                        },
-                        color: 'lightgreen'
-                    }
-                ]
-            });
-
-            calendar.render();
-
-            // Show the side panel with available slots for the selected date
-            function showSidePanel(date) {
-                var eventDate = calendar.getEvents().filter(event => event.startStr.includes(date))[0];
-                if (eventDate) {
-                    var availableSlots = eventDate.extendedProps.availableSlots;
-                    slotsList.innerHTML = '';
-                    availableSlots.forEach(slot => {
-                        var li = document.createElement('li');
-                        li.textContent = slot;
-                        li.onclick = function() {
-                            toggleSlotSelection(slot, li);
-                        };
-                        slotsList.appendChild(li);
-                    });
-                    sidePanel.style.display = 'block';
-                    calendarEl.classList.add('calendar-with-panel');
-                }
-            }
-
-            // Toggle slot selection
-            function toggleSlotSelection(slot, li) {
-                if (selectedSlots.includes(slot)) {
-                    selectedSlots = selectedSlots.filter(s => s !== slot);
-                    li.style.backgroundColor = '#e0f7fa';
-                } else {
-                    selectedSlots.push(slot);
-                    li.style.backgroundColor = '#4caf50';
-                }
-            }
-
-            // Close the side panel
-            function closePanel() {
-                sidePanel.style.display = 'none';
-                calendarEl.classList.remove('calendar-with-panel');
-            }
-
-            // Booking selected slot(s)
-            function bookSlot() {
-                if (selectedSlots.length > 0) {
-                    alert('Booking confirmed for the following slot(s): ' + selectedSlots.join(', '));
-                    // You can add your backend call to book the slot here
-                    closePanel(); // Close panel after booking
-                } else {
-                    alert('Please select at least one time slot to book.');
-                }
-            }
-        });
-    </script>
 </body>
 </html>
