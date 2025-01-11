@@ -5,8 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Our Mission</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #mission {
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00796b;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+            #mission {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            #mission {
+                padding: 20px 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px;
+            }
+
+            #mission {
+                padding: 15px 8px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <div class="logo">
             <a href="index.html">Org Logo</a>
@@ -33,5 +158,6 @@
     <footer>
         <p>&copy; 2025 RecreAction. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
