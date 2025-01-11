@@ -5,8 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Frequently Asked Questions</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        #faq {
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00796b;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 1024px) {
+            #faq {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px;
+            }
+
+            #faq {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 10px;
+            }
+
+            #faq {
+                padding: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
+
     <header>
         <div class="logo">
             <a href="index.html">Org Logo</a>
@@ -25,14 +149,34 @@
 
     <main>
         <section id="faq">
-            <h1>FAQs</h1>
-            <p>Q: How can I book the event space?<br>A: Use the Bookings page to select an available slot and complete your booking.</p>
-            <p>Q: Can I cancel my booking?<br>A: Yes, please contact us at least 48 hours in advance for cancellations.</p>
+            <h1>Frequently Asked Questions</h1>
+
+            <div class="faq-item">
+                <p class="faq-question">Q: How can I book the event space?</p>
+                <p class="faq-answer">A: Use the Bookings page to select an available slot and complete your booking.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">Q: Can I cancel my booking?</p>
+                <p class="faq-answer">A: Yes, please contact us at least 48 hours in advance for cancellations.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">Q: How far in advance do I need to book the space?</p>
+                <p class="faq-answer">A: We recommend booking at least 2 weeks in advance to ensure availability.</p>
+            </div>
+
+            <div class="faq-item">
+                <p class="faq-question">Q: What amenities are included with the event space?</p>
+                <p class="faq-answer">A: The event space comes with chairs, tables, and basic AV equipment. Additional equipment can be rented.</p>
+            </div>
+
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 RecreAction. All rights reserved.</p>
     </footer>
+
 </body>
 </html>
