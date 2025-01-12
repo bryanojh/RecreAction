@@ -15,7 +15,7 @@ body {
 header {
     background-color: #00796b;
     color: white;
-    padding: 8px 20px;
+    padding: 5px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,21 +64,21 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .logo img {
-        width: 90px; /* Adjust logo size for smaller screens */
+        width: 100px; /* Adjust logo size for smaller screens */
     }
 
     header nav ul li {
-        margin: 0 4px; /* Reduced margin for tighter spacing on small screens */
+        margin: 0 8px; /* Reduced margin for tighter spacing on small screens */
     }
 
     header nav ul li a {
-        font-size: 0.9rem; /* Reduced font size on mobile */
+        font-size: 1.2rem; /* Reduced font size on mobile */
     }
 }
 
