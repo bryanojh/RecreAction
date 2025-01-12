@@ -10,6 +10,9 @@ body {
     color: #333;
     background-color: #f4f4f9;
     line-height: 1.6;
+    display: flex; /* Make the body a flex container */
+    flex-direction: column; /* Stack elements vertically */
+    min-height: 100vh; /* Ensure the body takes up full viewport height */
 }
 
 /* Header Styles */
@@ -20,7 +23,7 @@ header {
     display: flex;
     justify-content: space-between; /* Space between logo and nav */
     align-items: center;
-    width: 100%;
+    width: 100%; /* Make the header full width */
 }
 
 .logo {
@@ -28,7 +31,7 @@ header {
 }
 
 .logo img {
-    width: 100px; /* Adjust logo size */
+    width: 100px;
     height: auto;
 }
 
@@ -55,19 +58,20 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* Media Query for Smaller Screens */
-@media (max-width: 768px) {
-    .logo img {
-        width: 90px; /* Adjust logo size for smaller screens */
-    }
+/* Main Content Styles */
+main {
+    flex: 1; /* Allow main content to grow to fill remaining space */
+    display: flex;
+    justify-content: center; /* Center the content container horizontally */
+    align-items: flex-start; /* Align content container to the top */
+}
 
-    nav ul li {
-        margin: 0 5px; /* Reduced margin for tighter spacing on small screens */
-    }
-
-    nav ul li a {
-        font-size: 1.1rem; /* Reduced font size on mobile */
-    }
+.content-container {
+    width: 80%; /* Adjust width as needed */
+    max-width: 960px; /* Set a maximum width for responsiveness */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Hero Section Styles */
@@ -76,4 +80,12 @@ nav ul li a {
     height: auto;
     border-radius: 5px;
     margin-bottom: 2rem;
+}
+
+/* Footer Styles */
+footer {
+    background: #00796b;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
 }
