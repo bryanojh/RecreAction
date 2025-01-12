@@ -15,7 +15,7 @@ body {
 header {
     background-color: #00796b;
     color: white;
-    padding: 10px 20px;
+    padding: 10px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,18 +37,17 @@ header nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
+    margin-left: 50px;
 }
 
 header nav ul li {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 header nav ul li a {
     color: white;
     text-decoration: none;
 }
-
-
 
 /* Hero Section */
 .hero-image {
