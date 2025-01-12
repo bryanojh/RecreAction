@@ -20,6 +20,7 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
+    max-width: 100%;
 }
 
 .logo {
@@ -37,7 +38,7 @@ header nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    margin-left: 50px;
+    margin-left: 80px;
 }
 
 header nav ul li {
