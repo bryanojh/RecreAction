@@ -40,8 +40,9 @@ header {
 nav {
   flex-grow: 1; /* Take up available space */
   display: flex;
-  justify-content: center; /* Center the navigation bar horizontally */
+  justify-content: flex-start; /* Shift navigation closer to the left */
   align-items: center; /* Center items vertically */
+  margin-left: 10%; /* Fine-tune the left positioning */
 }
 
 nav ul {
