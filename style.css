@@ -9,13 +9,13 @@ body {
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #f4f4f9;
-    line-height: 0.5;
+    line-height: 1.6;
 }
 
 header {
     background-color: #00796b;
     color: white;
-    padding: 10px 30px;
+    padding: 10px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,14 +58,14 @@ header nav ul {
 }
 
 header nav ul li {
-    margin: 0 10px; /* Reduce margin for tighter alignment */
+    margin: 0 15px; /* Reduce margin for tighter alignment */
 }
 
 header nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
