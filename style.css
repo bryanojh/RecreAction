@@ -17,15 +17,9 @@ header {
     color: white;
     padding: 10px 30px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
-    max-width: 100%;
-}
-
-.logo {
-    position: absolute;
-    left: 20px;
 }
 
 .logo img {
@@ -33,12 +27,17 @@ header {
     height: auto;
 }
 
+@media (max-width: 768px) {
+    .logo img {
+        width: 120px;
+    }
+}
+
 header nav ul {
     list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
-    margin-left: 80px;
 }
 
 header nav ul li {
@@ -109,7 +108,6 @@ header nav ul li a {
     background: #0056b3;
 }
 
-/* Footer */
 footer {
     background: #333;
     color: white;
