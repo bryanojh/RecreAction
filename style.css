@@ -42,7 +42,7 @@ nav {
   display: flex;
   justify-content: flex-start; /* Shift navigation closer to the left */
   align-items: center; /* Center items vertically */
-  margin-left: 280px; /* Fine-tune the left positioning */
+  margin-left: 300px; /* Fine-tune the left positioning */
 }
 
 nav ul {
