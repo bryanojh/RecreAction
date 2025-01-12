@@ -137,6 +137,13 @@ header nav ul li a {
     background: #0056b3;
 }
 
+.day.selected {
+    background-color: #00796b !important;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #004d40;
+}
+
 footer {
     background: #333;
     color: white;
