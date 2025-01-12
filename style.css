@@ -17,22 +17,16 @@ header {
     color: white;
     padding: 10px 0; /* Reduced padding to make header smaller */
     display: flex;
-    justify-content: center; /* Center the header content */
+    justify-content: space-between; /* Space between logo and nav */
     align-items: center;
     width: 100%;
 }
 
-header .nav-left {
-    position: absolute;
-    left: 20px;
+.logo {
+    margin-left: 20px; /* Add margin to left of logo */
 }
 
-header .logo {
-    display: flex;
-    justify-content: center;
-}
-
-header .logo img {
+.logo img {
     width: 100px; /* Adjust logo size */
     height: auto;
 }
@@ -41,7 +35,6 @@ nav {
     display: flex;
     justify-content: center; /* Center the nav items */
     align-items: center;
-    width: 100%;
 }
 
 nav ul {
