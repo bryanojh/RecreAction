@@ -13,6 +13,7 @@ body {
   display: flex; /* Make the body a flex container */
   flex-direction: column; /* Stack elements vertically */
   min-height: 100vh; /* Ensure the body takes up full viewport height */
+  justify-content: center; /* Center the content vertically within the body */ 
 }
 
 /* Header Styles */
@@ -67,6 +68,7 @@ main {
   display: flex;
   flex-direction: column; /* Stack content vertically */
   align-items: center; /* Center the content container horizontally */
+  justify-content: center; /* Center the content container vertically */ 
 }
 
 .content-container {
