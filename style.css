@@ -17,30 +17,35 @@ header {
     color: white;
     padding: 10px 30px;
     display: flex;
-    justify-content: space-between; /* Distribute space between the items */
+    justify-content: space-between; /* Space out left, logo, and right sections */
     align-items: center;
     width: 100%;
 }
 
 nav {
     display: flex;
+    justify-content: center; /* Center the nav items */
+    align-items: center;
     width: 100%;
-    justify-content: space-between; /* Space out left and right navigation */
 }
 
 .nav-left, .nav-right {
     display: flex;
     align-items: center;
+    justify-content: center; /* Center items in each section */
+    gap: 15px; /* Add consistent spacing between items */
 }
 
 .logo {
+    flex-grow: 0; /* Prevent the logo from stretching */
     display: flex;
+    align-items: center;
     justify-content: center;
-    flex-grow: 1; /* Make the logo take the available space in the center */
+    margin: 0 20px; /* Add spacing between the logo and nav sections */
 }
 
 .logo img {
-    width: 150px; /* Adjust size as needed */
+    width: 120px; /* Adjust logo size as needed */
     height: auto;
 }
 
@@ -48,24 +53,30 @@ header nav ul {
     list-style: none;
     padding: 0;
     display: flex;
+    align-items: center;
     margin: 0;
 }
 
 header nav ul li {
-    margin: 0 15px;
+    margin: 0 10px; /* Reduce margin for tighter alignment */
 }
 
 header nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 1rem; /* Adjust font size */
+    font-weight: 500;
 }
 
 @media (max-width: 768px) {
     .logo img {
-        width: 120px;
+        width: 100px; /* Smaller logo for smaller screens */
+    }
+
+    header nav ul li {
+        margin: 0 5px; /* Tighter spacing for smaller screens */
     }
 }
-
 
 /* Hero Section */
 .hero-image {
