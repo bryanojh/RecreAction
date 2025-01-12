@@ -13,7 +13,7 @@
         }
 
         .calendar-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
             text-align: center;
             background: #fff;
@@ -38,8 +38,17 @@
             margin-top: 20px;
         }
 
+        .day-header {
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            background: #00796b;
+            color: white;
+            border-radius: 5px;
+        }
+
         .day {
-            padding: 15px;
+            padding: 10px;
             background: #e0e0e0;
             border-radius: 5px;
             text-align: center;
@@ -58,22 +67,48 @@
             color: #fff;
         }
 
-        button {
-            padding: 10px 20px;
-            background-color: #00796b;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-        }
-
-        button:hover {
-            background-color: #004d40;
-        }
-
         .empty {
             visibility: hidden;
+        }
+
+        .time-slot-container {
+            display: none;
+            margin-top: 20px;
+            max-width: 600px;
+            width: 100%;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-slot {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8bc34a;
+            color: white;
+            cursor: pointer;
+        }
+
+        .time-slot.booked {
+            background-color: #bdbdbd;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        .close-button {
+            margin-top: 20px;
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -85,64 +120,108 @@
             <button onclick="changeMonth(-1)">&#8592; Previous</button>
             <button onclick="changeMonth(1)">Next &#8594;</button>
         </div>
-        <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="calendar-grid" id="calendar-grid">
+            <!-- Day headers (e.g., Sunday, Monday) -->
+            <div class="day-header">Sunday</div>
+            <div class="day-header">Monday</div>
+            <div class="day-header">Tuesday</div>
+            <div class="day-header">Wednesday</div>
+            <div class="day-header">Thursday</div>
+            <div class="day-header">Friday</div>
+            <div class="day-header">Saturday</div>
+        </div>
+        <!-- Booking slots -->
+        <div id="time-slot-container" class="time-slot-container">
+            <h3 id="selected-date"></h3>
+            <div id="time-slots"></div>
+            <button class="close-button" onclick="closeSlots()">Close</button>
+        </div>
     </div>
 
     <script>
-        // Variables for the current month and year
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
+        let bookedSlots = {};
 
-        // Generate the calendar
-        function generateCalendar() {
-            const monthNames = [
-                "January", "February", "March", "April", "May", "June",
-                "July", "August", "September", "October", "November", "December"
-            ];
+        // Pre-book Movie Night every Sunday from 6 PM to 10 PM
+        function setupMovieNights() {
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYear, currentMonth, day);
+                if (date.getDay() === 0) {
+                    const dateKey = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                    bookedSlots[dateKey] = ["6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"];
+                }
+            }
+        }
 
-            // Update the month and year header
+        function generateCalendar() {
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+
             document.getElementById("month-year").textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
-            // Clear the calendar grid
             const calendarGrid = document.getElementById("calendar-grid");
             calendarGrid.innerHTML = "";
+            for (let i = 0; i < 7; i++) {
+                const header = document.createElement("div");
+                header.classList.add("day-header");
+                header.textContent = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][i];
+                calendarGrid.appendChild(header);
+            }
 
-            // Add empty slots for days before the first day of the month
-            for (let i = 0; i < firstDayOfMonth; i++) {
+            for (let i = 0; i < firstDay; i++) {
                 const emptyCell = document.createElement("div");
                 emptyCell.classList.add("day", "empty");
                 calendarGrid.appendChild(emptyCell);
             }
 
-            // Add the days of the month
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayCell = document.createElement("div");
                 dayCell.classList.add("day");
                 dayCell.textContent = day;
-                dayCell.addEventListener("click", () => selectDay(dayCell));
+                const dateKey = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                dayCell.onclick = () => showSlots(dateKey);
                 calendarGrid.appendChild(dayCell);
             }
         }
 
-        // Highlight the selected day
-        function selectDay(dayCell) {
-            // Deselect previously selected day
-            const previouslySelected = document.querySelector(".day.selected");
-            if (previouslySelected) {
-                previouslySelected.classList.remove("selected");
-            }
-
-            // Select the clicked day
-            dayCell.classList.add("selected");
-            alert(`You selected: ${dayCell.textContent} ${document.getElementById("month-year").textContent}`);
+        function showSlots(dateKey) {
+            const container = document.getElementById("time-slot-container");
+            const slotsContainer = document.getElementById("time-slots");
+            slotsContainer.innerHTML = "";
+            document.getElementById("selected-date").textContent = `Available Slots for ${dateKey}`;
+            const hours = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"];
+            const booked = bookedSlots[dateKey] || [];
+            hours.forEach(hour => {
+                const slot = document.createElement("div");
+                slot.classList.add("time-slot");
+                if (booked.includes(hour)) {
+                    slot.classList.add("booked");
+                    slot.textContent = `${hour} (Booked)`;
+                } else {
+                    slot.textContent = hour;
+                    slot.onclick = () => bookSlot(dateKey, hour);
+                }
+                slotsContainer.appendChild(slot);
+            });
+            container.style.display = "block";
         }
 
-        // Change the month
+        function bookSlot(dateKey, hour) {
+            if (!bookedSlots[dateKey]) bookedSlots[dateKey] = [];
+            bookedSlots[dateKey].push(hour);
+            alert(`Slot booked for ${hour} on ${dateKey}`);
+            showSlots(dateKey);
+        }
+
+        function closeSlots() {
+            document.getElementById("time-slot-container").style.display = "none";
+        }
+
         function changeMonth(direction) {
             currentMonth += direction;
-
             if (currentMonth < 0) {
                 currentMonth = 11;
                 currentYear--;
@@ -150,11 +229,11 @@
                 currentMonth = 0;
                 currentYear++;
             }
-
+            setupMovieNights();
             generateCalendar();
         }
 
-        // Initialize the calendar on page load
+        setupMovieNights();
         generateCalendar();
     </script>
 </body>
