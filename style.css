@@ -16,7 +16,7 @@ body {
 header {
     background-color: #00796b;
     color: white;
-    padding: 10px 0; /* Reduced padding to make header smaller */
+    padding: 10px 0;
     display: flex;
     justify-content: space-between; /* Space between logo and nav */
     align-items: center;
@@ -24,7 +24,7 @@ header {
 }
 
 .logo {
-    margin-left: 20px; /* Add margin to left of logo */
+    margin-left: 20px;
 }
 
 .logo img {
@@ -48,14 +48,11 @@ nav ul {
 
 nav ul li {
     margin: 0 15px;
-    display: flex; /* Make each list item a flex container */
-    justify-content: center; /* Center text within each list item */
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1.2rem;
 }
 
 /* Media Query for Smaller Screens */
