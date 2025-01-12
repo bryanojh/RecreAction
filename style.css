@@ -17,50 +17,32 @@ header {
     color: white;
     padding: 10px 30px;
     display: flex;
-    justify-content: space-between; /* Distribute space between the nav elements */
+    justify-content: space-between; /* Distribute space between the items */
     align-items: center;
-    position: relative;
     width: 100%;
 }
 
 nav {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-between; /* Space out left and right navigation */
+}
+
+.nav-left, .nav-right {
+    display: flex;
     align-items: center;
 }
 
-nav .nav-left, nav .nav-right {
-    display: flex;
-}
-
 .logo {
-    position: absolute; /* Makes the logo center independently of the nav */
-    left: 50%;
-    transform: translateX(-50%); /* Center the logo horizontally */
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Make the logo take the available space in the center */
 }
 
 .logo img {
-    width: 150px;
+    width: 150px; /* Adjust size as needed */
     height: auto;
 }
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    margin: 0;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
 
 header nav ul {
     list-style: none;
