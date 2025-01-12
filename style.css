@@ -42,12 +42,14 @@ nav ul {
     list-style: none;
     display: flex;
     padding: 0;
-    justify-content: center;
-    margin: 0;
+    justify-content: center; /* Center the nav items horizontally */
+    align-items: center; /* Center the nav items vertically */
 }
 
 nav ul li {
     margin: 0 15px;
+    display: flex; /* Make each list item a flex container */
+    justify-content: center; /* Center text within each list item */
 }
 
 nav ul li a {
