@@ -5,113 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Home</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: #00796b;
-            color: white;
-            padding: 10px 0; /* Reduced padding to make header smaller */
-            text-align: center;
-        }
-
-        header nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        header nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        header nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem; /* Slightly larger font size */
-        }
-
-        header .logo img {
-            width: 120px;
-            height: auto;
-            margin-top: 10px;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 20px;
-        }
-
-        .content-container {
-            width: 100%;
-            max-width: 1000px;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-image {
-            width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .calendar-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        footer {
-            background-color: #00796b;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-    </style>
 </head>
 <body>
 <header>
+    <div class="logo">
+        <a href="index.html">
+            <img src="RecreAction.png" alt="Org Logo">
+        </a>
+    </div>
     <nav>
-        <div class="nav-left">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="movies.html">Movies</a></li>
-            </ul>
-        </div>
-        <div class="logo">
-            <a href="index.html">
-                <img src="RecreAction.png" alt="Org Logo">
-            </a>
-        </div>
-        <div class="nav-right">
-            <ul>
-                <li><a href="enquiries.html">FAQ</a></li>
-                <li><a href="mission.html">Our Mission</a></li>
-                <li><a href="bookings.html">Bookings</a></li>
-            </ul>
-        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="enquiries.html">FAQ</a></li>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="bookings.html">Bookings</a></li>
+        </ul>
     </nav>
 </header>
 
@@ -119,7 +29,6 @@
     <div class="content-container">
         <img src="area-picture.jpg" alt="Picture of the area" class="hero-image">
         <div class="calendar-container">
-            <!-- Calendar will be embedded here -->
             <iframe src="calendar.html" title="Events Calendar" style="width: 100%; height: 600px; border: none;"></iframe>
         </div>
     </div>
