@@ -22,7 +22,7 @@ header {
   padding: 5px 0; /* Reduced padding to make header smaller */
   display: flex;
   justify-content: space-between; /* Space between logo and nav */
-  align-items: center;
+  align-items: center; /* Vertically center the content */
   width: 100%; /* Make the header full width */
   position: sticky; /* Stick the header to the top of the viewport */
   top: 0; /* Position the header at the top */
@@ -41,7 +41,7 @@ header {
 nav {
   display: flex;
   justify-content: center; /* Center the nav items */
-  align-items: center;
+  align-items: center; /* Vertically center the nav items */
 }
 
 nav ul {
@@ -60,6 +60,7 @@ nav ul li a {
   color: white;
   text-decoration: none;
 }
+
 
 /* Main Content Styles */
 main {
