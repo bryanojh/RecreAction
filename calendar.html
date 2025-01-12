@@ -4,25 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Booking Calendar</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
         }
 
         .calendar-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .calendar-header {
+            max-width: 600px;
+            margin: 50px auto;
             text-align: center;
-            margin-bottom: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         h1 {
@@ -32,170 +29,120 @@
         .month-year {
             font-size: 1.8rem;
             margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days of the week */
+            grid-template-columns: repeat(7, 1fr);
             gap: 5px;
-            width: 100%;
-            max-width: 800px;
             margin-top: 20px;
         }
 
         .day {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background: #e0e0e0;
+            border-radius: 5px;
             text-align: center;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .day:hover {
-            background-color: #00796b;
-            color: white;
+            background: #00796b;
+            color: #fff;
         }
 
         .day.selected {
-            background-color: #004d40;
-            color: white;
+            background: #004d40;
+            color: #fff;
         }
 
-        .time-slot-container {
-            display: none;
-            margin-top: 20px;
-            max-width: 600px;
-            width: 100%;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .close-button {
-            margin-top: 20px;
-            background-color: #00796b;
-            color: white;
+        button {
             padding: 10px 20px;
+            background-color: #00796b;
+            color: #fff;
             border: none;
-            cursor: pointer;
-            font-size: 1rem;
             border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
         }
 
-        @media (max-width: 768px) {
-            .calendar-container {
-                padding: 15px;
-            }
+        button:hover {
+            background-color: #004d40;
+        }
 
-            .calendar-grid {
-                grid-template-columns: repeat(4, 1fr); /* 4 columns for smaller screens */
-            }
-
-            .day {
-                padding: 10px;
-            }
+        .empty {
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
     <div class="calendar-container">
-        <div class="calendar-header">
-            <h1>Space Availability</h1>
-            <p>Click on a day to view available time slots for booking.</p>
-        </div>
-
-        <!-- Month & Year Display -->
-        <div class="month-year">
-            <button onclick="changeMonth(-1)">&#8592; Prev</button>
-            <div id="month-year" class="month-year-label">January 2025</div>
+        <h1>Space Availability</h1>
+        <div class="month-year" id="month-year">January 2025</div>
+        <div>
+            <button onclick="changeMonth(-1)">&#8592; Previous</button>
             <button onclick="changeMonth(1)">Next &#8594;</button>
         </div>
-
-        <!-- Month View Calendar -->
-        <div class="calendar-grid" id="calendar-grid">
-            <!-- Dynamically generated days will go here -->
-        </div>
-
-        <!-- Time slots for the clicked day -->
-        <div id="time-slot-container" class="time-slot-container">
-            <h3 id="selected-date"></h3>
-            <button class="close-button" onclick="closeSlots()">Close</button>
-        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
     </div>
 
     <script>
-        // Initialize the current month and year
-        let currentMonth = new Date().getMonth(); // 0 = January, 11 = December
+        // Variables for the current month and year
+        let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
 
-        // Variable to keep track of the selected day
-        let selectedDayElement = null;
-
-        // Function to generate the calendar for the current month
+        // Generate the calendar
         function generateCalendar() {
             const monthNames = [
                 "January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get number of days in the current month
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // Get first day of the month
+            // Update the month and year header
+            document.getElementById("month-year").textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
-            const calendarGrid = document.getElementById('calendar-grid');
-            calendarGrid.innerHTML = ''; // Clear existing grid
+            // Clear the calendar grid
+            const calendarGrid = document.getElementById("calendar-grid");
+            calendarGrid.innerHTML = "";
 
-            // Update the month and year label
-            document.getElementById('month-year').textContent = `${monthNames[currentMonth]} ${currentYear}`;
-
-            // Create empty spaces before the first day of the month
-            for (let i = 0; i < firstDay; i++) {
-                const emptyCell = document.createElement('div');
-                emptyCell.classList.add('day');
+            // Add empty slots for days before the first day of the month
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyCell = document.createElement("div");
+                emptyCell.classList.add("day", "empty");
                 calendarGrid.appendChild(emptyCell);
             }
 
-            // Create the days in the month
-            for (let i = 1; i <= daysInMonth; i++) {
-                const dayElement = document.createElement('div');
-                dayElement.classList.add('day');
-                dayElement.setAttribute('data-date', `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`);
-                dayElement.innerHTML = `<span class="day-number">${i}</span>`;
-                dayElement.addEventListener('click', () => selectDay(dayElement));
-                calendarGrid.appendChild(dayElement);
+            // Add the days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement("div");
+                dayCell.classList.add("day");
+                dayCell.textContent = day;
+                dayCell.addEventListener("click", () => selectDay(dayCell));
+                calendarGrid.appendChild(dayCell);
             }
         }
 
-        // Function to handle day selection
-        function selectDay(dayElement) {
-            // Deselect the previously selected day
-            if (selectedDayElement) {
-                selectedDayElement.classList.remove('selected');
+        // Highlight the selected day
+        function selectDay(dayCell) {
+            // Deselect previously selected day
+            const previouslySelected = document.querySelector(".day.selected");
+            if (previouslySelected) {
+                previouslySelected.classList.remove("selected");
             }
 
-            // Select the new day
-            selectedDayElement = dayElement;
-            selectedDayElement.classList.add('selected');
-
-            // Display the time slot container
-            const selectedDate = dayElement.getAttribute('data-date');
-            document.getElementById('selected-date').innerText = `Available slots for ${selectedDate}`;
-            document.getElementById('time-slot-container').style.display = 'block';
+            // Select the clicked day
+            dayCell.classList.add("selected");
+            alert(`You selected: ${dayCell.textContent} ${document.getElementById("month-year").textContent}`);
         }
 
-        // Function to close the time slot view
-        function closeSlots() {
-            document.getElementById('time-slot-container').style.display = 'none';
-        }
-
-        // Function to navigate between months
+        // Change the month
         function changeMonth(direction) {
             currentMonth += direction;
+
             if (currentMonth < 0) {
                 currentMonth = 11;
                 currentYear--;
@@ -203,11 +150,12 @@
                 currentMonth = 0;
                 currentYear++;
             }
-            generateCalendar(); // Regenerate the calendar for the new month
+
+            generateCalendar();
         }
 
         // Initialize the calendar on page load
-        window.onload = generateCalendar;
+        generateCalendar();
     </script>
 </body>
 </html>
