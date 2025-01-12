@@ -17,7 +17,7 @@ header {
     color: white;
     padding: 2px 20px; /* Reduced padding to make header smaller */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Align items on left and right */
     align-items: center;
     width: 100%;
 }
@@ -29,7 +29,14 @@ nav {
     width: 100%;
 }
 
-.nav-left, .nav-right {
+.nav-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Ensure the logo stays on the left */
+    gap: 15px; /* Add consistent spacing between items */
+}
+
+.nav-right {
     display: flex;
     align-items: center;
     justify-content: center; /* Center items in each section */
@@ -37,11 +44,9 @@ nav {
 }
 
 .logo {
-    flex-grow: 0; /* Prevent the logo from stretching */
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 15px; /* Reduced spacing between logo and nav sections */
+    justify-content: flex-start; /* Ensure logo stays on the left */
 }
 
 .logo img {
@@ -55,6 +60,7 @@ header nav ul {
     display: flex;
     align-items: center;
     margin: 0;
+    justify-content: center; /* Center the navigation items */
 }
 
 header nav ul li {
