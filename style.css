@@ -15,7 +15,7 @@ body {
 header {
     background-color: #00796b;
     color: white;
-    padding: 5px 20px;
+    padding: 2px 20px; /* Reduced padding to make header smaller */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,11 +41,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 20px; /* Add spacing between the logo and nav sections */
+    margin: 0 15px; /* Reduced spacing between logo and nav sections */
 }
 
 .logo img {
-    width: 120px; /* Adjust logo size as needed */
+    width: 100px; /* Adjust logo size as needed */
     height: auto;
 }
 
@@ -58,7 +58,7 @@ header nav ul {
 }
 
 header nav ul li {
-    margin: 0 15px; /* Reduce margin for tighter alignment */
+    margin: 0 10px; /* Reduced margin for tighter alignment */
 }
 
 header nav ul li a {
@@ -70,11 +70,11 @@ header nav ul li a {
 
 @media (max-width: 768px) {
     .logo img {
-        width: 100px; /* Adjust logo size for smaller screens */
+        width: 90px; /* Adjust logo size for smaller screens */
     }
 
     header nav ul li {
-        margin: 0 8px; /* Reduced margin for tighter spacing on small screens */
+        margin: 0 5px; /* Reduced margin for tighter spacing on small screens */
     }
 
     header nav ul li a {
