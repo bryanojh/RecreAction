@@ -174,54 +174,68 @@
     </div>
 
     <script>
-        // Initialize the current month and year
-        let currentMonth = new Date().getMonth(); // 0 = January, 11 = December
-        let currentYear = new Date().getFullYear();
-
+       // Variable to store the currently selected day
+        let selectedDayElement = null;
+        
         // Function to generate the calendar for the current month
         function generateCalendar() {
             const monthNames = [
                 "January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
-
+        
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get number of days in the current month
             const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // Get first day of the month
-
+        
             const calendarGrid = document.getElementById('calendar-grid');
             calendarGrid.innerHTML = ''; // Clear existing grid
-
+        
             // Update the month and year label
             document.getElementById('month-year').textContent = `${monthNames[currentMonth]} ${currentYear}`;
-
+        
             // Create empty spaces before the first day of the month
             for (let i = 0; i < firstDay; i++) {
                 const emptyCell = document.createElement('div');
                 emptyCell.classList.add('day');
                 calendarGrid.appendChild(emptyCell);
             }
-
+        
             // Create the days in the month
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayElement = document.createElement('div');
                 dayElement.classList.add('day');
-                dayElement.setAttribute('onclick', `showSlots('${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}')`);
+                dayElement.setAttribute('onclick', `selectDay(this, '${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}')`);
                 dayElement.innerHTML = `<span class="day-number">${i}</span>`;
                 calendarGrid.appendChild(dayElement);
             }
         }
-
+        
+        // Function to handle day selection
+        function selectDay(element, date) {
+            // If another day is already selected, revert its style
+            if (selectedDayElement) {
+                selectedDayElement.classList.remove('selected');
+            }
+        
+            // Highlight the newly selected day
+            element.classList.add('selected');
+            selectedDayElement = element;
+        
+            // Display available time slots for the selected date
+            showSlots(date);
+        }
+        
         // Function to show time slots when a day is clicked
         function showSlots(date) {
             document.getElementById('selected-date').innerText = `Available slots for ${date}`;
             document.getElementById('time-slot-container').style.display = 'block';
         }
-
+        
         // Function to close the time slot view
         function closeSlots() {
             document.getElementById('time-slot-container').style.display = 'none';
         }
-
+        
         // Function to navigate between months
         function changeMonth(direction) {
             currentMonth += direction;
@@ -232,9 +246,10 @@
                 currentMonth = 0;
                 currentYear++;
             }
+            selectedDayElement = null; // Clear the selected day when changing months
             generateCalendar(); // Regenerate the calendar for the new month
         }
-
+        
         // Initialize the calendar on page load
         window.onload = generateCalendar;
     </script>
