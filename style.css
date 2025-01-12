@@ -17,8 +17,14 @@ header {
     color: white;
     padding: 10px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 20px;
 }
 
 .logo img {
@@ -26,14 +32,11 @@ header {
     height: auto;
 }
 
-header nav {
-    margin-left: auto;
-}
-
 header nav ul {
     list-style: none;
     padding: 0;
     display: flex;
+    justify-content: center;
 }
 
 header nav ul li {
@@ -44,6 +47,7 @@ header nav ul li a {
     color: white;
     text-decoration: none;
 }
+
 
 
 /* Hero Section */
