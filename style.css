@@ -15,11 +15,26 @@ body {
 header {
     background-color: #00796b;
     color: white;
-    padding: 2px 20px; /* Reduced padding to make header smaller */
+    padding: 10px 0; /* Reduced padding to make header smaller */
     display: flex;
-    justify-content: space-between; /* Align items on left and right */
+    justify-content: center; /* Center the header content */
     align-items: center;
     width: 100%;
+}
+
+header .nav-left {
+    position: absolute;
+    left: 20px;
+}
+
+header .logo {
+    display: flex;
+    justify-content: center;
+}
+
+header .logo img {
+    width: 100px; /* Adjust logo size */
+    height: auto;
 }
 
 nav {
@@ -29,49 +44,22 @@ nav {
     width: 100%;
 }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Ensure the logo stays on the left */
-    gap: 15px; /* Add consistent spacing between items */
-}
-
-.nav-right {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center items in each section */
-    gap: 15px; /* Add consistent spacing between items */
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Ensure logo stays on the left */
-}
-
-.logo img {
-    width: 100px; /* Adjust logo size as needed */
-    height: auto;
-}
-
-header nav ul {
+nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
-    align-items: center;
+    padding: 0;
+    justify-content: center;
     margin: 0;
-    justify-content: center; /* Center the navigation items */
 }
 
-header nav ul li {
-    margin: 0 10px; /* Reduced margin for tighter alignment */
+nav ul li {
+    margin: 0 15px;
 }
 
-header nav ul li a {
+nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.2rem;
 }
 
 @media (max-width: 768px) {
@@ -79,12 +67,12 @@ header nav ul li a {
         width: 90px; /* Adjust logo size for smaller screens */
     }
 
-    header nav ul li {
+    nav ul li {
         margin: 0 5px; /* Reduced margin for tighter spacing on small screens */
     }
 
-    header nav ul li a {
-        font-size: 1.2rem; /* Reduced font size on mobile */
+    nav ul li a {
+        font-size: 1.1rem; /* Reduced font size on mobile */
     }
 }
 
@@ -155,7 +143,7 @@ header nav ul li a {
 }
 
 footer {
-    background: #333;
+    background: #00796b;
     color: white;
     text-align: center;
     padding: 1rem 0;
