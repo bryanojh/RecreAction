@@ -6,7 +6,6 @@
     <title>RecreAction - Home</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Reset margins and padding for better layout handling */
         * {
             margin: 0;
             padding: 0;
@@ -27,27 +26,36 @@
         header {
             background-color: #00796b;
             color: white;
-            padding: 20px;
+            padding: 10px 0; /* Reduced padding to make header smaller */
             text-align: center;
         }
 
         header nav ul {
             list-style: none;
             padding: 0;
+            display: flex;
+            justify-content: center;
         }
 
         header nav ul li {
             display: inline;
-            margin: 0 10px;
+            margin: 0 15px;
         }
 
         header nav ul li a {
             color: white;
             text-decoration: none;
+            font-size: 1.2rem; /* Slightly larger font size */
+        }
+
+        header .logo img {
+            width: 120px;
+            height: auto;
+            margin-top: 10px;
         }
 
         main {
-            flex: 1; /* This allows the main content to expand and fill the available space */
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -56,7 +64,7 @@
 
         .content-container {
             width: 100%;
-            max-width: 1000px; /* Limit the width of the content */
+            max-width: 1000px;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -106,18 +114,20 @@
         </div>
     </nav>
 </header>
-    <main>
-        <div class="content-container">
-            <img src="area-picture.jpg" alt="Picture of the area" class="hero-image">
-            <div class="calendar-container">
-                <!-- Calendar will be embedded here -->
-                <iframe src="calendar.html" title="Events Calendar" style="width: 100%; height: 600px; border: none;"></iframe>
-            </div>
-        </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2025 RecreAction. All rights reserved.</p>
-    </footer>
+<main>
+    <div class="content-container">
+        <img src="area-picture.jpg" alt="Picture of the area" class="hero-image">
+        <div class="calendar-container">
+            <!-- Calendar will be embedded here -->
+            <iframe src="calendar.html" title="Events Calendar" style="width: 100%; height: 600px; border: none;"></iframe>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 RecreAction. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
