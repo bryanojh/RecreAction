@@ -21,46 +21,51 @@ header {
   color: white;
   padding: 5px 0; /* Reduced padding to make header smaller */
   display: flex;
+  align-items: center; /* Vertically center all header content */
   justify-content: space-between; /* Space between logo and nav */
-  align-items: center; /* Vertically center the content */
   width: 100%; /* Make the header full width */
   position: sticky; /* Stick the header to the top of the viewport */
   top: 0; /* Position the header at the top */
   z-index: 1; /* Ensure the header stays on top of other content */
 }
 
+/* Logo Container */
 .logo {
-  margin-left: 20px;
+  margin-left: 20px; /* Push logo away from the edge */
+  display: flex; /* Ensures proper alignment of logo content */
+  align-items: center;
 }
 
-.logo img {
-  width: 100px;
-  height: auto;
-}
-
+/* Navigation Bar */
 nav {
+  flex-grow: 1; /* Take up available space */
   display: flex;
-  justify-content: center; /* Center the nav items */
-  align-items: center; /* Vertically center the nav items */
+  justify-content: center; /* Center the navigation bar horizontally */
+  align-items: center; /* Center items vertically */
 }
 
 nav ul {
   list-style: none;
   display: flex;
   padding: 0;
-  justify-content: center; /* Center the nav items horizontally */
-  align-items: center; /* Center the nav items vertically */
+  margin: 0;
 }
 
 nav ul li {
-  margin: 0 10px; /* Reduced margin for closer spacing */
+  margin: 0 10px; /* Space between nav items */
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
+  font-size: 1.2rem;
 }
 
+/* Ensure the logo and nav remain aligned */
+.logo img {
+  width: 100px;
+  height: auto;
+}
 
 /* Main Content Styles */
 main {
