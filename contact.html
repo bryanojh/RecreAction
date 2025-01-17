@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - RecreAction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .form-container textarea {
+            height: 150px;
+        }
+
+        .form-container button {
+            background-color: #00796b;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .form-container button:hover {
+            background-color: #004d40;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        .contact-info a {
+            color: #00796b;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+
+        <div class="form-container">
+            <form id="contact-form">
+                <input type="text" id="user-name" placeholder="Your Name" required />
+                <input type="email" id="user-email" placeholder="Your Email Address" required />
+                <textarea id="user-message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Our Contact Information:</h3>
+            <p><strong>Email:</strong> <a href="mailto:support@recreaction.com">support@recreaction.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 234-567-890</a></p>
+            <p><strong>Address:</strong> 123 RecreAction Street, City, Country</p>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission (just for demonstration, it doesn't actually send the message)
+        document.getElementById("contact-form").onsubmit = function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("user-name").value;
+            const email = document.getElementById("user-email").value;
+            const message = document.getElementById("user-message").value;
+
+            // Simulate a successful form submission
+            alert(`Thank you for contacting us, ${name}! Your message has been received.`);
+            
+            // Optionally, you can reset the form fields after submission
+            document.getElementById("contact-form").reset();
+        };
+    </script>
+
+</body>
+</html>
