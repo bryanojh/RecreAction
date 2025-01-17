@@ -147,7 +147,7 @@
         </div>
         <!-- User Form for Booking -->
         <div class="form-container" id="form-container">
-            <h3>Fill in your details to confirm your booking</h3>
+            <h3>Fill in your details to confirm your booking for <span id="selected-date"></span></h3>
             <form id="booking-form">
                 <input type="text" id="user-name" placeholder="Your Name" required />
                 <input type="text" id="user-phone" placeholder="Your Phone Number" required />
@@ -218,8 +218,12 @@
 
         function showForm(dateKey) {
             selectedDateKey = dateKey;
+            const selectedDate = new Date(dateKey);
+            const formattedDate = `${selectedDate.getDate()}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`;
+            
+            document.getElementById("selected-date").textContent = formattedDate;
             const container = document.getElementById("form-container");
-            document.getElementById("form-container").style.display = "block";
+            container.style.display = "block";
         }
 
         function closeForm() {
