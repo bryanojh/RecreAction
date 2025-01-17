@@ -158,7 +158,6 @@
         <!-- Booking slots -->
         <div id="time-slot-container" class="time-slot-container">
             <h3 id="selected-date"></h3>
-            <div id="time-slots"></div>
             <button class="close-button" onclick="closeSlots()">Close</button>
         </div>
         <!-- User Form for Booking -->
@@ -178,16 +177,15 @@
         let currentYear = new Date().getFullYear();
         let bookedSlots = {};
         let selectedDateKey = '';
-        let selectedHour = '';
 
-        // Pre-book Movie Night every Sunday from 6 PM to 10 PM
+        // Pre-book Movie Night every Sunday (blocks Sundays)
         function setupMovieNights() {
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
             for (let day = 1; day <= daysInMonth; day++) {
                 const date = new Date(currentYear, currentMonth, day);
-                if (date.getDay() === 0) {
-                    const dateKey = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-                    bookedSlots[dateKey] = ["6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"];
+                const dateKey = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                if (date.getDay() === 0) { // Block Sundays
+                    bookedSlots[dateKey] = true; // Mark Sunday as booked
                 }
             }
         }
@@ -219,43 +217,28 @@
                 dayCell.classList.add("day");
                 dayCell.textContent = day;
                 const dateKey = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-                dayCell.onclick = () => showSlots(dateKey);
+                if (bookedSlots[dateKey]) {
+                    dayCell.classList.add("booked");
+                } else {
+                    dayCell.onclick = () => showSlots(dateKey);
+                }
                 calendarGrid.appendChild(dayCell);
             }
         }
 
         function showSlots(dateKey) {
-            const container = document.getElementById("time-slot-container");
-            const slotsContainer = document.getElementById("time-slots");
-            slotsContainer.innerHTML = "";
-            document.getElementById("selected-date").textContent = `Available Slots for ${dateKey}`;
-            const hours = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"];
-            const booked = bookedSlots[dateKey] || [];
-            hours.forEach(hour => {
-                const slot = document.createElement("div");
-                slot.classList.add("time-slot");
-                if (booked.includes(hour)) {
-                    slot.classList.add("booked");
-                    slot.textContent = `${hour} (Booked)`;
-                } else {
-                    slot.textContent = hour;
-                    slot.onclick = () => bookSlot(dateKey, hour);
-                }
-                slotsContainer.appendChild(slot);
-            });
-            container.style.display = "block";
-        }
-
-        function bookSlot(dateKey, hour) {
             selectedDateKey = dateKey;
-            selectedHour = hour;
+            const container = document.getElementById("time-slot-container");
+            document.getElementById("selected-date").textContent = `Available for Booking: ${dateKey}`;
 
             // Show form to fill out details
             document.getElementById("form-container").style.display = "block";
+            container.style.display = "block";
         }
 
         function closeSlots() {
             document.getElementById("time-slot-container").style.display = "none";
+            document.getElementById("form-container").style.display = "none";
         }
 
         function changeMonth(direction) {
@@ -279,18 +262,17 @@
             const phone = document.getElementById("user-phone").value;
             const email = document.getElementById("user-email").value;
 
-            // Save the booking
-            if (!bookedSlots[selectedDateKey]) bookedSlots[selectedDateKey] = [];
-            bookedSlots[selectedDateKey].push(selectedHour);
+            // Mark the selected day as booked
+            bookedSlots[selectedDateKey] = true;
 
-            alert(`Booking confirmed for ${name} (${phone}, ${email}) at ${selectedHour} on ${selectedDateKey}`);
+            alert(`Booking confirmed for ${name} (${phone}, ${email}) on ${selectedDateKey}`);
 
             // Reset the form and close it
             document.getElementById("form-container").style.display = "none";
             document.getElementById("user-name").value = '';
             document.getElementById("user-phone").value = '';
             document.getElementById("user-email").value = '';
-            showSlots(selectedDateKey); // Refresh the available slots
+            generateCalendar(); // Refresh the calendar to reflect the new booking
         };
 
         setupMovieNights();
