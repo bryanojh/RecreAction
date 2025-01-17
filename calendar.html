@@ -110,6 +110,31 @@
             font-size: 1rem;
             border-radius: 5px;
         }
+
+        .form-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            margin: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-container button {
+            margin-top: 10px;
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -136,12 +161,24 @@
             <div id="time-slots"></div>
             <button class="close-button" onclick="closeSlots()">Close</button>
         </div>
+        <!-- User Form for Booking -->
+        <div class="form-container" id="form-container">
+            <h3>Fill in your details to confirm your booking</h3>
+            <form id="booking-form">
+                <input type="text" id="user-name" placeholder="Your Name" required />
+                <input type="text" id="user-phone" placeholder="Your Phone Number" required />
+                <input type="email" id="user-email" placeholder="Your Email Address" required />
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
     </div>
 
     <script>
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
         let bookedSlots = {};
+        let selectedDateKey = '';
+        let selectedHour = '';
 
         // Pre-book Movie Night every Sunday from 6 PM to 10 PM
         function setupMovieNights() {
@@ -210,10 +247,11 @@
         }
 
         function bookSlot(dateKey, hour) {
-            if (!bookedSlots[dateKey]) bookedSlots[dateKey] = [];
-            bookedSlots[dateKey].push(hour);
-            alert(`Slot booked for ${hour} on ${dateKey}`);
-            showSlots(dateKey);
+            selectedDateKey = dateKey;
+            selectedHour = hour;
+
+            // Show form to fill out details
+            document.getElementById("form-container").style.display = "block";
         }
 
         function closeSlots() {
@@ -232,6 +270,28 @@
             setupMovieNights();
             generateCalendar();
         }
+
+        // Form submission to confirm the booking
+        document.getElementById("booking-form").onsubmit = function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById("user-name").value;
+            const phone = document.getElementById("user-phone").value;
+            const email = document.getElementById("user-email").value;
+
+            // Save the booking
+            if (!bookedSlots[selectedDateKey]) bookedSlots[selectedDateKey] = [];
+            bookedSlots[selectedDateKey].push(selectedHour);
+
+            alert(`Booking confirmed for ${name} (${phone}, ${email}) at ${selectedHour} on ${selectedDateKey}`);
+
+            // Reset the form and close it
+            document.getElementById("form-container").style.display = "none";
+            document.getElementById("user-name").value = '';
+            document.getElementById("user-phone").value = '';
+            document.getElementById("user-email").value = '';
+            showSlots(selectedDateKey); // Refresh the available slots
+        };
 
         setupMovieNights();
         generateCalendar();
