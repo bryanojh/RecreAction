@@ -10,76 +10,82 @@ body {
   color: #333;
   background-color: #f4f4f9;
   line-height: 1.6;
-  display: flex; /* Make the body a flex container */
-  flex-direction: column; /* Stack elements vertically */
-  min-height: 100vh; /* Ensure the body takes up full viewport height */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Header Styles */
 header {
   background-color: #00796b;
   color: white;
-  padding: 5px 0;
-  display: flex;
-  align-items: center; /* Vertically center all header content */
-  justify-content: space-between; /* Space between logo and nav */
-  width: 100%;
-  position: sticky; /* Stick the header to the top of the viewport */
+  padding: 30px 20px; /* Increased padding for a larger green area */
+  position: sticky;
   top: 0;
   z-index: 1;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo Container */
-.logo {
-  margin-left: 20px;
+/* Header Content */
+.header-content {
   display: flex;
   align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  left: 0px;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
 }
 
 /* Navigation Bar */
 nav {
   flex-grow: 1;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 22.3%;
+  justify-content: center;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  margin: 0 10px;
+  gap: 20px;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
   font-size: 1.2rem;
+  transition: color 0.3s ease;
 }
 
-/* Ensure the logo and nav remain aligned */
-.logo img {
-  width: 100px;
-  height: auto;
+nav ul li a:hover {
+  color: #e0f7fa;
 }
 
 /* Main Content Styles */
 main {
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Ensure main takes up available space */
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
-  min-height: calc(100vh - 110px); /* Adjust height based on header */
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px); /* Adjust height based on header and footer */
 }
 
-/* Content container - centers within the main area */
 .content-container {
   width: 100%;
   max-width: 960px;
@@ -88,16 +94,72 @@ main {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content */
+  align-items: center;
 }
 
-/* Hero Section Styles */
 .hero-image {
   width: 100%;
   height: auto;
   border-radius: 5px;
   margin-bottom: 2rem;
 }
+
+/* Calendar Container */
+.calendar-container {
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Space Availability Title */
+h1 {
+  color: #00796b;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Month & Year */
+.month-year {
+  font-size: 1.5rem;
+  margin: 15px 0;
+  display: flex;
+  justify-content: center; /* Ensure the month/year is centered */
+  align-items: center;
+  gap: 10px; /* Space between text and navigation buttons */
+}
+
+/* Calendar Buttons */
+.calendar-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center; /* Center the buttons */
+}
+
+/* General Button Styling */
+button {
+  background-color: #00796b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #004d40;
+}
+
 
 /* Footer Styles */
 footer {
@@ -106,6 +168,27 @@ footer {
   text-align: center;
   padding: 1rem 0;
   width: 100%;
-  position: relative; /* Ensure footer stays at the bottom */
-  bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column; /* Stack logo and navbar vertically */
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    width: 80px; /* Resize the logo for smaller screens */
+  }
+
+  nav ul li a {
+    font-size: 1rem; /* Adjust font size for smaller screens */
+  }
 }
