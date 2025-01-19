@@ -31,21 +31,23 @@ header {
 }
 
 /* Header Content */
+/* Logo */
+.logo {
+  margin-left: 20px; /* Adds some space between the logo and the left edge */
+}
+
+/* Header Content */
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* Logo to the left, nav links spread out */
   max-width: 1200px;
   margin: 0 auto;
   gap: 20px;
   position: relative;
+  width: 100%; /* Ensure the header content uses the full width */
 }
 
-/* Logo */
-.logo {
-  position: absolute;
-  left: 0px;
-}
 
 .logo img {
   width: 100px;
