@@ -5,156 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecreAction - Bookings</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        /* Header styles */
-        header {
-            background-color: #00796b;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        header nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        header nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Main content styles */
-        main {
-            flex: 1;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        }
-
-        #bookings {
-            max-width: 1000px;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #00796b;
-        }
-
-        .calendar-embed {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Footer styles */
-        footer {
-            background-color: #00796b;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Media queries for responsiveness */
-        @media (max-width: 1024px) {
-            #bookings {
-                padding: 15px;
-            }
-
-            .calendar-embed {
-                height: 500px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 15px;
-            }
-
-            #bookings {
-                padding: 10px;
-            }
-
-            .calendar-embed {
-                height: 400px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 10px;
-            }
-
-            #bookings {
-                padding: 5px;
-            }
-
-            .calendar-embed {
-                height: 350px;
-            }
-        }
-    </style>
 </head>
 <body>
-
     <header>
-        <div class="logo">
-            <a href="index.html">Org Logo</a>
+        <div class="header-container">
+            <div class="logo">
+                <img src="RecreAction.png" alt="RecreAction Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="bookings.html">Bookings</a></li>
+                    <li><a href="mission.html">Our Mission</a></li>
+                    <li><a href="enquiries.html">FAQ</a></li>
+                    <li><a href="contact.html" class="button">Contact Us</a></li>
+                </ul>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="enquiries.html">FAQ</a></li>
-                <li><a href="mission.html">Our Mission</a></li>
-                <li><a href="bookings.html">Bookings</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
-        <section id="bookings">
-            <h1>Book an Event Space</h1>
-            <iframe src="calendar.html" title="Booking Calendar" class="calendar-embed"></iframe>
-        </section>
+        <div class="calendar-container">
+            <iframe src="calendar.html" title="Events Calendar" style="width: 70%; height: 960px; border: 1;"></iframe>
+        </div>
     </main>
-
     <footer>
-        <p>&copy; 2025 RecreAction. All rights reserved.</p>
-    </footer>
+        <div class="footer-info">
+            <p>&copy; 2025 RecreAction. All rights reserved.</p>
+            <p class="location">Our Location: 610A Choa Chu Kang 681610</p>
+        </div>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="bookings.html">Bookings</a></li>
+                <li><a href="mission.html">Our Mission</a></li>
+                <li><a href="enquiries.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>    
 
 </body>
 </html>
